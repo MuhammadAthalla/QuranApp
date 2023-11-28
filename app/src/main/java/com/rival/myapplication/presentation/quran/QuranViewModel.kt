@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rival.myapplication.core.data.network.ApiConfig
+import com.rival.myapplication.core.data.network.quran.AyahResponse
 import com.rival.myapplication.core.data.network.quran.SurahResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,6 +15,8 @@ class QuranViewModel : ViewModel() {
 
     private var _listSurah = MutableLiveData<SurahResponse>()
     val listSurah: LiveData<SurahResponse> = _listSurah
+    private var _listAyah = MutableLiveData<AyahResponse>()
+    val listAyah: LiveData<AyahResponse> = _listAyah
 
     fun getListSurah() {
         ApiConfig.getQuranService.getListSurah().enqueue(object : Callback<SurahResponse> {
@@ -31,6 +34,28 @@ class QuranViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<SurahResponse>, t: Throwable) {
+                Log.e(
+                    "QuranViewModel",
+                    "onResponse: Call error with Http status code " + t.localizedMessage
+                )
+            }
+
+        })
+    }
+    fun getListAyah(number:Int){
+        ApiConfig.getQuranService.getDetailSurah(number).enqueue(object: Callback<AyahResponse>{
+            override fun onResponse(call: Call<AyahResponse>, response: Response<AyahResponse>) {
+                if (response.isSuccessful){
+                    _listAyah.postValue(response.body())
+
+                }else Log.e(
+                    "QuranViewModel",
+                    "onResponse: Call error with Http status code " + response.code()
+                )
+            }
+
+            override fun onFailure(call: Call<AyahResponse>, t: Throwable) {
+
                 Log.e(
                     "QuranViewModel",
                     "onResponse: Call error with Http status code " + t.localizedMessage

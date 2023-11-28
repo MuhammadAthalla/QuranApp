@@ -20,7 +20,7 @@ class QuranFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentQuranBinding.inflate(layoutInflater)
+        binding = FragmentQuranBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -28,7 +28,8 @@ class QuranFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val mAdapter = ListSurahAdapter()
+        var mAdapter = ListSurahAdapter()
+
 
         if (quranViewModel.listSurah.value == null) {
             quranViewModel.getListSurah()
