@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">QuranApp</string>
     <string name="adzan">Adzan</string>
     <string name="quran">Quran</string>
     <string name="doa">Doa</string>
@@ -15,4 +14,8 @@
     <string name="ashar">Ashar</string>
     <string name="maghrib">Maghrib</string>
     <string name="isya">Isya</string>
+
+
+
+
 </resources>

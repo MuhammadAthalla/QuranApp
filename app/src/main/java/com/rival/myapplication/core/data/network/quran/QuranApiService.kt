@@ -10,5 +10,5 @@ interface QuranApiService {
     @GET("surah")
     fun getListSurah() : Call<SurahResponse>
     @GET("surah/{number}/editions/quran-uthmani,ar.alafasy,id.indonesian")
-    fun getDetailSurah(@Path("number")numberSurah :Int):Call<AyahsRespons>
+    fun getDetailSurah(@Path("number")numberSurah :Int): Call<AyahResponse>
 }
